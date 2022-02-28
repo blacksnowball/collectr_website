@@ -1,0 +1,97 @@
+{% extends 'base_page.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+{% if trade %}
+    <div>
+        <h2>User Details</h2>
+        <p>Name: {{user.username}}</p>
+        <p>Email: {{user.email}}</p>
+    </div>
+    <div id="close-trade-section">
+        <h2>Trade Status</h2>
+        Active: {{trade.active}}
+        {% if trade.creator == user %}
+        <a href="{% url 'trade-post' trade_id=trade.id %}">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </a>
+        {% endif %}
+    </div>
+    <div id="favourite-section">
+        <h2>Bookmark status</h2>
+        {% if bookmarked %}
+        {{bookmarked}}
+        <a href="{% url 'bookmarked-trades' trade_id=trade.id %}">
+            <i class="fa fa-bookmark fa-lg" aria-hidden="true"></i>
+        </a>
+        {% else %}
+        {{bookmarked}}
+        <a href="{% url 'bookmarked-trades' trade_id=trade.id %}">
+            <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i>
+        </a>
+        {% endif %}
+    </div>
+    <h2>Have</h2>
+    <div>
+        <ul>
+            {% for have_item in have_items %}
+            <li>{{have_item.name}}</li>
+            <img src="{{have_item.cover_image.url}}"/>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h2>Want</h2>
+        <ul>
+            {% for want_item in want_items %}
+            <li>{{want_item.name}}</li>
+            <img src="{{want_item.cover_image.url}}"/>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h2>Description</h2>
+        <p>{{trade.description}}</p>
+    </div>
+    <div>
+        <h2>Screenshots</h2>
+        {% for screenshot in screenshots %}
+        <img src="{{screenshot.attachment.url}}"/>
+        {% empty %}
+        <p>No screenshots to show.</p>
+        {% endfor %}
+    </div>
+    <br>
+
+{% else %}
+    <h1>No Trade Information To See.</h1>
+{% endif %}
+
+{% if user.is_authenticated %}
+
+    <form name="commentForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="comment">Make an offer!</label>
+            <textarea class="form-control" id="comment" name="comment" rows="3" maxlength="3500"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit comment</button>
+    </form>
+
+{% endif %}
+
+
+<h1>User comments</h1>
+{% for comment in comments %}
+    <br>
+    {{comment.username.username}} | {{comment.email.email}} | {{comment.timestamp}}
+    <br>
+    {{comment.comment}}
+    <br>
+    <br>
+{% empty %}
+   <h2>No comments to see.</h2>
+{% endfor %}
+
+{% endblock %}

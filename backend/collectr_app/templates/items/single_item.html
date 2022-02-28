@@ -1,0 +1,93 @@
+{% extends 'base_page.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<script>
+    function getData() {
+        // first check that description is not empty
+        return [item.name, item.item_id];
+    }
+</script>
+<br><br>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col ml-5 ">
+            <img class="card-img-top" src="{{item.cover_image.url}}" style="position: sticky;">
+        </div>
+        <div class="col">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">{{item.name}}</div>
+                    <div class="card-body">
+                        <p>Part of Collection {{collection.title}}</p>
+                        <p>{{collected_text}}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <form method="POST" action="{% url 'add_item' %}" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" name="item" value="{{item.name}}|{{item.item_id}}">Add Item to Collection</button>
+                        </div>
+                    </form>
+                    
+                    <p><br></p>
+                    <a class="btn btn-primary" href="">Add item to watch list</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            {{item.description}}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Recent Trades Involving This Item</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% if trades %}
+                    <div class="container">
+                        {% for trade in trades %}
+                        <div class="row">
+                                <div class="card-group" style="overflow-x: scroll;">
+                                    {% for item in trade.items %}
+                                    <div class="card" style="width: 10rem;">
+                                        <img class="card-img-top" style="height: 10rem" src="{{item.cover_image.url}}">
+                                        <div class="card-header bg-primary text-white">
+                                            <a class='btn btn-primary' href="/collections/{{collection.title}}/items/{{item.item_id}}/"> {{item.name}}</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            <div class="col">
+                                <div class="card" style="height: 13rem">
+                                    <p class="bg-primary text-white text-center">Creator: {{trade.user}}</p>
+                                    <br>
+                                    <p class="bg-primary text-white text-center">Condition: {{trade.trade.condition}}
+                                    </p>
+                                    <br>
+                                    <p class="bg-primary text-white text-center">Active: {{trade.trade.active}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="card">
+                            <p class="h1 text-center text-danger">No Trade Available</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}

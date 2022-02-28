@@ -1,0 +1,20 @@
+{% extends 'base_page.html' %}
+{% block content %}
+
+    <h2>Viewing bookmarked trades</h2>
+    <br>
+    <br>
+
+    {% include "display_trades.html" with trades_and_screenshots=bookmarked_trades %}
+
+<!--    <ul>-->
+<!--    {% for post in bookmarked_posts %}-->
+<!--        <p><a href="/trades/{{ post.trade_id }}/">{{ post.description }}</a></p>-->
+<!--        <p>{{ post.condition }}</p>-->
+<!--        <br>-->
+<!--    {% empty %}-->
+<!--        <li>This user has no bookmarked posts.</li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+
+{% endblock %}

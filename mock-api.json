@@ -1,0 +1,464 @@
+{
+    "source": "mockoon:1.16.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "bb03b54d-581e-4f0c-ba11-dddd020feb91",
+                "lastMigration": 18,
+                "name": "collectr",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 3001,
+                "hostname": "0.0.0.0",
+                "routes": [
+                    {
+                        "uuid": "9baf9b05-0a73-4167-ba33-a9ace6ab56fd",
+                        "documentation": "Validates credentials and returns JWT",
+                        "method": "post",
+                        "endpoint": "api/auth/login",
+                        "responses": [
+                            {
+                                "uuid": "9f08803f-ea9b-47d1-b6bc-c6868739cd03",
+                                "body": "{\n  \"tokens\": {\n    \"access\": \"{{ faker 'random.uuid' }}\",\n    \"refresh\": \"{{ faker 'random.uuid' }}\"\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "39784eb2-96df-4f53-a61b-260f673888af",
+                        "documentation": "Validates credentials and returns JWT",
+                        "method": "post",
+                        "endpoint": "api/auth/refresh",
+                        "responses": [
+                            {
+                                "uuid": "86e6b873-7157-4beb-be93-9d37e50aa03e",
+                                "body": "{\n  \"tokens\": {\n    \"access\": \"{{ faker 'random.uuid' }}\"\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "dc343c4e-df53-4751-9e73-4a287d328a1e",
+                        "documentation": "Takes JWT and returns user data",
+                        "method": "get",
+                        "endpoint": "api/auth/user",
+                        "responses": [
+                            {
+                                "uuid": "1ec90832-8ea9-418f-b142-a517f4e6155f",
+                                "body": "{\n  \"user\": {\n    \"id\": \"{{ faker 'random.uuid' }}\",\n    \"username\": \"{{ faker 'internet.userName' }}\",\n    \"email\": \"{{ faker 'internet.email' }}\",\n    \"about\": \"{{ faker 'commerce.productDescription' }}\",\n    \"is_staff\": \"{{ faker 'random.boolean' }}\"\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer my-jwt-token"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "b5ba6950-2f1d-4bd6-aaf3-d31890e53e2e",
+                        "documentation": "Returns a list of all available trades",
+                        "method": "get",
+                        "endpoint": "api/trades",
+                        "responses": [
+                            {
+                                "uuid": "5986a34d-c4a8-45f3-a7f4-a49af8678c23",
+                                "body": "{\r\n    \"count\": 3,\r\n    \"next\": null,\r\n    \"previous\": null,\r\n    \"results\": [\r\n        {\r\n            \"id\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"creator\": {\r\n                \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                \"email\": \"test@test.com\",\r\n                \"username\": \"test\"\r\n            },\r\n            \"description\": \"this is a test trade!\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-10-29T06:00:15.730848Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"238b31eb-48b7-4f3f-acf2-5f08e152df45\",\r\n                    \"name\": \"Russian Roulette\",\r\n                    \"description\": \"2016 album with 7 songs\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/russian_roulette.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                },\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                },\r\n                {\r\n                    \"id\": \"93bfca66-5936-4496-bfe8-53bbc1c18706\",\r\n                    \"name\": \"Torch\",\r\n                    \"description\": \"The gift of Prometheus which endows us with clear sight in the darkness of ignorance.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/torch.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/raw_porkchop_MH9qag9_M46Y3oQ.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/raw_porkchop_JzxCYQf.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [\r\n                {\r\n                    \"id\": \"ac8ce37d-8d0b-4647-930f-3c6f0c411fc9\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"username\": \"foobar\"\r\n                },\r\n                {\r\n                    \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                    \"email\": \"test@test.com\",\r\n                    \"username\": \"test\"\r\n                }\r\n            ],\r\n            \"comments\": [\r\n                {\r\n                    \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n                    \"username\": \"test\",\r\n                    \"email\": \"test@test.com\",\r\n                    \"comment\": \"quickselling for $2 each!\",\r\n                    \"timestamp\": \"2021-10-29T06:04:20.983328Z\"\r\n                },\r\n                {\r\n                    \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n                    \"username\": \"foobar\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"comment\": \"$2 for both?\",\r\n                    \"timestamp\": \"2021-10-29T06:10:12.850456Z\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"414048c7-71bc-4adc-a128-0fda2462e0ca\",\r\n            \"creator\": {\r\n                \"id\": \"ac8ce37d-8d0b-4647-930f-3c6f0c411fc9\",\r\n                \"email\": \"foo@bar.com.au\",\r\n                \"username\": \"foobar\"\r\n            },\r\n            \"description\": \"vintage torches~\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-10-29T06:10:30.894783Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"93bfca66-5936-4496-bfe8-53bbc1c18706\",\r\n                    \"name\": \"Torch\",\r\n                    \"description\": \"The gift of Prometheus which endows us with clear sight in the darkness of ignorance.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/torch.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"a6523275-2b66-4d9c-9d9f-3e5a1529fec9\",\r\n                    \"name\": \"Diamond Pickaxe\",\r\n                    \"description\": \"3 diamonds + 2 sticks\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/diamond_pickaxe.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_e5VNEf4_Fpt7005.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_RRJd147_IyYPKPR.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_7yxhKwb.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [],\r\n            \"comments\": [\r\n                {\r\n                    \"trade\": \"414048c7-71bc-4adc-a128-0fda2462e0ca\",\r\n                    \"username\": \"foobar\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"comment\": \"good vlaue!\",\r\n                    \"timestamp\": \"2021-10-29T06:10:38.738284Z\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"cbb0d17a-5cc4-4033-822e-bd5905607c4e\",\r\n            \"creator\": {\r\n                \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                \"email\": \"test@test.com\",\r\n                \"username\": \"test\"\r\n            },\r\n            \"description\": \"clearly not a porkchop!\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-11-03T06:30:41.161330Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"de6d57a4-3413-482a-8f72-891c0acce22b\",\r\n                    \"name\": \"TNT\",\r\n                    \"description\": \"Now I am become Death, the destroyer of worlds.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/tnt.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_NfdO3k1.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [],\r\n            \"comments\": []\r\n        }\r\n    ]\r\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "7265e414-b61b-4ab1-94b0-69ffc03917f6",
+                        "documentation": "Returns a list of all available trades",
+                        "method": "post",
+                        "endpoint": "api/trades/search",
+                        "responses": [
+                            {
+                                "uuid": "66f583bc-e714-4c11-8376-ec28aaf0c450",
+                                "body": "{\r\n    \"count\": 3,\r\n    \"next\": null,\r\n    \"previous\": null,\r\n    \"results\": [\r\n        {\r\n            \"id\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"creator\": {\r\n                \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                \"email\": \"test@test.com\",\r\n                \"username\": \"test\"\r\n            },\r\n            \"description\": \"this is a test trade!\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-10-29T06:00:15.730848Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"238b31eb-48b7-4f3f-acf2-5f08e152df45\",\r\n                    \"name\": \"Russian Roulette\",\r\n                    \"description\": \"2016 album with 7 songs\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/russian_roulette.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                },\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                },\r\n                {\r\n                    \"id\": \"93bfca66-5936-4496-bfe8-53bbc1c18706\",\r\n                    \"name\": \"Torch\",\r\n                    \"description\": \"The gift of Prometheus which endows us with clear sight in the darkness of ignorance.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/torch.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/raw_porkchop_MH9qag9_M46Y3oQ.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/raw_porkchop_JzxCYQf.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [\r\n                {\r\n                    \"id\": \"ac8ce37d-8d0b-4647-930f-3c6f0c411fc9\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"username\": \"foobar\"\r\n                },\r\n                {\r\n                    \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                    \"email\": \"test@test.com\",\r\n                    \"username\": \"test\"\r\n                }\r\n            ],\r\n            \"comments\": [\r\n                {\r\n                    \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n                    \"username\": \"test\",\r\n                    \"email\": \"test@test.com\",\r\n                    \"comment\": \"quickselling for $2 each!\",\r\n                    \"timestamp\": \"2021-10-29T06:04:20.983328Z\"\r\n                },\r\n                {\r\n                    \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n                    \"username\": \"foobar\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"comment\": \"$2 for both?\",\r\n                    \"timestamp\": \"2021-10-29T06:10:12.850456Z\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"414048c7-71bc-4adc-a128-0fda2462e0ca\",\r\n            \"creator\": {\r\n                \"id\": \"ac8ce37d-8d0b-4647-930f-3c6f0c411fc9\",\r\n                \"email\": \"foo@bar.com.au\",\r\n                \"username\": \"foobar\"\r\n            },\r\n            \"description\": \"vintage torches~\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-10-29T06:10:30.894783Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"93bfca66-5936-4496-bfe8-53bbc1c18706\",\r\n                    \"name\": \"Torch\",\r\n                    \"description\": \"The gift of Prometheus which endows us with clear sight in the darkness of ignorance.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/torch.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"a6523275-2b66-4d9c-9d9f-3e5a1529fec9\",\r\n                    \"name\": \"Diamond Pickaxe\",\r\n                    \"description\": \"3 diamonds + 2 sticks\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/diamond_pickaxe.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_e5VNEf4_Fpt7005.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_RRJd147_IyYPKPR.png\"\r\n                },\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_7yxhKwb.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [],\r\n            \"comments\": [\r\n                {\r\n                    \"trade\": \"414048c7-71bc-4adc-a128-0fda2462e0ca\",\r\n                    \"username\": \"foobar\",\r\n                    \"email\": \"foo@bar.com.au\",\r\n                    \"comment\": \"good vlaue!\",\r\n                    \"timestamp\": \"2021-10-29T06:10:38.738284Z\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"cbb0d17a-5cc4-4033-822e-bd5905607c4e\",\r\n            \"creator\": {\r\n                \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n                \"email\": \"test@test.com\",\r\n                \"username\": \"test\"\r\n            },\r\n            \"description\": \"clearly not a porkchop!\",\r\n            \"active\": true,\r\n            \"creation_date\": \"2021-11-03T06:30:41.161330Z\",\r\n            \"have\": [\r\n                {\r\n                    \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n                    \"name\": \"Raw Porkchop\",\r\n                    \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"want\": [\r\n                {\r\n                    \"id\": \"de6d57a4-3413-482a-8f72-891c0acce22b\",\r\n                    \"name\": \"TNT\",\r\n                    \"description\": \"Now I am become Death, the destroyer of worlds.\",\r\n                    \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/tnt.png\",\r\n                    \"release_date\": \"2021-10-17\"\r\n                }\r\n            ],\r\n            \"attachments\": [\r\n                {\r\n                    \"attachment\": \"http://bert.triagonal.xyz:8000/attachments/aa_torch_NfdO3k1.png\"\r\n                }\r\n            ],\r\n            \"bookmarks\": [],\r\n            \"comments\": []\r\n        }\r\n    ]\r\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "5608e441-4144-4ce8-8025-3d6cbc566e36",
+                        "documentation": "Returns trade by id",
+                        "method": "get",
+                        "endpoint": "api/trade/*",
+                        "responses": [
+                            {
+                                "uuid": "4411fdc8-8cbb-41f4-a0a3-7467fd2e4ce6",
+                                "body": "{\r\n    \"id\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n    \"creator\": {\r\n        \"id\": \"bb4c38bc-7e19-46fb-b3eb-ec06e86211fb\",\r\n        \"email\": \"test@test.com\",\r\n        \"username\": \"test\"\r\n    },\r\n    \"description\": \"this is a test trade!\",\r\n    \"active\": true,\r\n    \"bookmarked\": true,\r\n    \"creation_date\": \"2021-10-29T06:00:15.730848Z\",\r\n    \"have\": [\r\n        {\r\n            \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n            \"name\": \"Raw Porkchop\",\r\n            \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n            \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n            \"release_date\": \"2021-10-17\"\r\n        }\r\n    ],\r\n    \"want\": [\r\n        {\r\n            \"id\": \"238b31eb-48b7-4f3f-acf2-5f08e152df45\",\r\n            \"name\": \"Russian Roulette\",\r\n            \"description\": \"2016 album with 7 songs\",\r\n            \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/russian_roulette.png\",\r\n            \"release_date\": \"2021-10-17\"\r\n        },\r\n        {\r\n            \"id\": \"401e10f2-f433-4547-aab9-b600ba7e9cfe\",\r\n            \"name\": \"Raw Porkchop\",\r\n            \"description\": \"No pigs were harmed in the acquisition of this porkchop\",\r\n            \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/raw_porkchop.png\",\r\n            \"release_date\": \"2021-10-17\"\r\n        },\r\n        {\r\n            \"id\": \"93bfca66-5936-4496-bfe8-53bbc1c18706\",\r\n            \"name\": \"Torch\",\r\n            \"description\": \"The gift of Prometheus which endows us with clear sight in the darkness of ignorance.\",\r\n            \"cover_image\": \"http://bert.triagonal.xyz:8000/uploads/torch.png\",\r\n            \"release_date\": \"2021-10-17\"\r\n        }\r\n    ],\r\n    \"attachments\": [\r\n        {\r\n            \"attachment\": \"https://www.nme.com/wp-content/uploads/2021/06/redvelvet-psycho-2019.jpg\"\r\n        },\r\n        {\r\n            \"attachment\": \"https://media.allure.com/photos/5b7b216846200866eeffd910/16:9/w_1280,c_limit/red-velvet-power-up-beauty-moments-irene.jpg\"\r\n        },\r\n        {\r\n            \"attachment\": \"https://0.soompi.io/wp-content/uploads/2017/04/26070909/Red-Velvet1.jpg?s=900x600&e=t\"\r\n        }\r\n    ],\r\n    \"comments\": [\r\n        {\r\n            \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"username\": \"test\",\r\n            \"email\": \"test@test.com\",\r\n            \"comment\": \"quickselling for $2 each!\",\r\n            \"timestamp\": \"2021-10-29T06:04:20.983328Z\"\r\n        },\r\n        {\r\n            \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"username\": \"foobar\",\r\n            \"email\": \"foo@bar.com.au\",\r\n            \"comment\": \"$2 for both?\",\r\n            \"timestamp\": \"2021-10-29T06:10:12.850456Z\"\r\n        }\r\n    ]\r\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "f2c4da4e-ee13-4766-b379-8466282f6e54",
+                        "documentation": "Returns trade by id",
+                        "method": "get",
+                        "endpoint": "api/trade/*/comments",
+                        "responses": [
+                            {
+                                "uuid": "e2a805fc-99e7-446a-bf63-c7e7b1096b2a",
+                                "body": "{\r\n    \"count\": 3,\r\n    \"next\": null,\r\n    \"previous\": null,\r\n    \"results\": [\r\n        {\r\n            \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"username\": \"test\",\r\n            \"email\": \"test@test.com\",\r\n            \"comment\": \"quickselling for $2 each!\",\r\n            \"timestamp\": \"2021-10-29T06:04:20.983328Z\"\r\n        },\r\n        {\r\n            \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"username\": \"foobar\",\r\n            \"email\": \"foo@bar.com.au\",\r\n            \"comment\": \"$2 for both?\",\r\n            \"timestamp\": \"2021-10-29T06:10:12.850456Z\"\r\n        },\r\n        {\r\n            \"trade\": \"260546fb-edb0-42b3-bae0-5f3e455cb45f\",\r\n            \"username\": \"test\",\r\n            \"email\": \"test@test.com\",\r\n            \"comment\": \"this is a test post comment!\",\r\n            \"timestamp\": \"2021-11-03T06:53:51.963262Z\"\r\n        }\r\n    ]\r\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "85f714eb-c2da-40f2-a34e-e296a3717946",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "api/trade/*/post_comment",
+                        "responses": [
+                            {
+                                "uuid": "5a7886ea-c78f-434a-949e-a8eafd29519e",
+                                "body": "{}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "d551961f-a361-46cc-b6b7-7a1e3082ca2b",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "api/user/create_bookmark",
+                        "responses": [
+                            {
+                                "uuid": "7bc9e4b2-eb64-49e7-a1df-6a974492a365",
+                                "body": "{}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "8e59405d-090d-4117-81ff-0d52cb12cd2f",
+                        "documentation": "Returns item by id",
+                        "method": "get",
+                        "endpoint": "api/item/*",
+                        "responses": [
+                            {
+                                "uuid": "6f5784b4-05c1-4f7e-ae83-4ef950688435",
+                                "body": "{\r  \"id\": \"{{ faker 'random.uuid' }}\",\r  \"name\": \"Queendom (Girls ver.)\",\r  \"collection\": {\r    \"id\": \"{{ faker 'random.uuid' }}\",\r    \"title\": \"Red Velvet\",\r    \"cover_image\": \"/img/collection/cover/red_velvet.png\",\r    \"thumbnail\": \"/img/collection/thumbnail/red_velvet.png\",\r    \"description\": \"{{ faker 'commerce.productDescription' }}\",\r    \"item_count\": {{ faker 'random.number' 100 }},\r    \"collected_count\": 0\r  },\r  \"collected\": {{ faker 'random.boolean' }},\r  \"image\": \"/img/item/queendom_girls_ver.png\",\r  \"description\": \"Queendom is the sixth Korean extended play and twelfth overall by South Korean girl group Red Velvet. Marketed as the group's sixth \\\"mini album\\\" release, it consists of six tracks, including the lead single of the same name.\",\r  \"release_date\": \"2021-08-17T16:45:38.827Z\"\r}\r",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "13973452-5802-429b-a525-e9b89416ebc4",
+                        "documentation": "Returns a list of all collections",
+                        "method": "get",
+                        "endpoint": "api/collections",
+                        "responses": [
+                            {
+                                "uuid": "15033845-f0ed-478f-989b-16b9457ef235",
+                                "body": "{\n  \"collections\": [\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"title\": \"Red Velvet\",\n      \"cover_image\": \"/img/collection/cover/red_velvet.png\",\n      \"thumbnail\": \"/img/collection/thumbnail/red_velvet.png\",\n      \"description\": \"{{ faker 'commerce.productDescription' }}\",\n      \"item_count\": {{ faker 'random.number' 100 }},\n      \"collected_count\": 0\n    },\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"title\": \"{{ faker 'commerce.product' }}\",\n      \"cover_image\": \"https://picsum.photos/256\",\n      \"thumbnail\": \"https://picsum.photos/256\",\n      \"description\": \"{{ faker 'commerce.productDescription' }}\",\n      \"item_count\": 23,\n      \"collected_count\": 23\n    },\n    {{# repeat 12 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"title\": \"{{ faker 'commerce.product' }}\",\n      \"cover_image\": \"https://picsum.photos/256\",\n      \"thumbnail\": \"https://picsum.photos/256\",\n      \"description\": \"{{ faker 'commerce.productDescription' }}\",\n      \"item_count\": {{ faker 'random.number' 100 }},\n      \"collected_count\": {{ faker 'random.number' 100 }}\n    }\n    {{/ repeat }}\n  ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer my-jwt-token"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "dc6f80e6-30cd-4375-a3f2-02fb99932092",
+                        "documentation": "Returns collection by id",
+                        "method": "get",
+                        "endpoint": "api/collection/*",
+                        "responses": [
+                            {
+                                "uuid": "a66d13b2-8c36-42b5-8323-29bfbd537c77",
+                                "body": "{\n  \"id\": \"{{ faker 'random.uuid' }}\",\n  \"title\": \"Red Velvet\",\n  \"cover_image\": \"/img/collection/cover/red_velvet.png\",\n  \"thumbnail\": \"/img/collection/thumbnail/red_velvet.png\",\n  \"description\": \"{{ faker 'commerce.productDescription' }}\",\n  \"item_count\": {{ faker 'random.number' 100 }},\n  \"collected_count\": 0,\n  \"items\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"name\": \"Queendom (Girls ver.)\",\n      \"collection\": {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"title\": \"Red Velvet\",\n        \"cover_image\": \"/img/collection/cover/red_velvet.png\",\n        \"thumbnail\": \"/img/collection/thumbnail/red_velvet.png\",\n        \"description\": \"{{ faker 'commerce.productDescription' }}\",\n        \"item_count\": {{ faker 'random.number' 100 }},\n        \"collected_count\": 0\n      },\n      \"collected\": {{ faker 'random.boolean' }},\n      \"image\": \"/img/item/queendom_girls_ver.png\",\n      \"description\": \"Queendom is the sixth Korean extended play and twelfth overall by South Korean girl group Red Velvet. Marketed as the group's sixth \\\"mini album\\\" release, it consists of six tracks, including the lead single of the same name.\",\n      \"release_date\": \"2021-08-17T16:45:38.827Z\"\n    }\n    {{/ repeat }}\n  ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "3b270da6-b451-4c2f-a365-0be0ddfb3ccb",
+                        "documentation": "Returns profile details by user id",
+                        "method": "get",
+                        "endpoint": "api/profile/*",
+                        "responses": [
+                            {
+                                "uuid": "3bbfd183-a138-4155-9e66-e727384f4ef9",
+                                "body": "{\n  \"profile\": {\n    \"id\": \"{{ faker 'random.uuid' }}\",\n    \"username\": \"{{ faker 'internet.userName' }}\",\n    \"image\": \"https://picsum.photos/256\",\n    \"about\": \"{{ faker 'commerce.productDescription' }}\",\n    \"items\": [\n      {{# repeat 12 }}\n      {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"name\": \"{{ faker 'commerce.product' }}\",\n        \"cover_image\": \"https://picsum.photos/256\",\n        \"release_date\": \"{{ faker 'date.past' }}\",\n        \"collection\": {\n          \"id\": \"{{ faker 'random.uuid' }}\",\n          \"title\": \"Red Velvet\",\n          \"cover_image\": \"https://picsum.photos/256\",\n          \"thumbnail\": \"https://picsum.photos/256\",\n          \"description\": \"{{ faker 'commerce.productDescription' }}\",\n          \"item_count\": {{ faker 'random.number' 100 }},\n          \"collected_count\": 0\n        }\n      }\n      {{/ repeat }}\n    ],\n    \"reputation\": [\n      {{# repeat 10 }}\n      {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"sender_id\": \"{{ faker 'internet.userName' }}\",\n        \"receiver_id\": \"{{ faker 'internet.userName' }}\",\n        \"comment\": \"{{ faker 'commerce.productDescription' }}\",\n        \"timestamp\": \"{{ faker 'date.past' }}\",\n        \"flagged\": \"{{ faker 'random.boolean' }}\"\n      }\n      {{/ repeat }}\n    ],\n    \"trades\": [\n      {{# repeat 10 }}\n      {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"creator_id\": \"{{ faker 'random.uuid' }}\",\n        \"creator_name\": \"{{ faker 'internet.userName' }}\",\n        \"have\": \"{{ faker 'commerce.productName' }}\",\n        \"want\": \"{{ faker 'commerce.productName' }}\",\n        \"description\": \"{{ faker 'commerce.productDescription' }}\",\n        \"creation_date\": \"{{ faker 'date.past' }}\",\n        \"active\": \"{{ faker 'random.boolean' }}\",\n        \"comments\": [\n          {{# repeat 12 }}\n          {\n            \"id\": \"{{ faker 'random.uuid' }}\",\n            \"user_id\": \"{{ faker 'internet.userName' }}\",\n            \"comment\": \"{{ faker 'commerce.productDescription' }}\",\n            \"timestamp\": \"{{ faker 'date.past' }}\"\n          }\n          {{/ repeat }}\n        ]\n      }\n      {{/ repeat }}\n    ],\n    \"bookmarked_trades\": [\n      {{# repeat 10 }}\n      {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"creator_id\": \"{{ faker 'random.uuid' }}\",\n        \"creator_name\": \"{{ faker 'internet.userName' }}\",\n        \"have\": \"{{ faker 'commerce.productName' }}\",\n        \"want\": \"{{ faker 'commerce.productName' }}\",\n        \"description\": \"{{ faker 'commerce.productDescription' }}\",\n        \"creation_date\": \"{{ faker 'date.past' }}\",\n        \"active\": \"{{ faker 'random.boolean' }}\",\n        \"comments\": [\n          {{# repeat 12 }}\n          {\n            \"id\": \"{{ faker 'random.uuid' }}\",\n            \"user_id\": \"{{ faker 'internet.userName' }}\",\n            \"comment\": \"{{ faker 'commerce.productDescription' }}\",\n            \"timestamp\": \"{{ faker 'date.past' }}\"\n          }\n          {{/ repeat }}\n        ]\n      }\n      {{/ repeat }}\n    ],\n    \"watchlist\": [\n      {{# repeat 12 }}\n      {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"name\": \"{{ faker 'commerce.product' }}\",\n        \"cover_image\": \"https://picsum.photos/256\",\n        \"release_date\": \"{{ faker 'date.past' }}\",\n        \"collection\": {\n          \"id\": \"{{ faker 'random.uuid' }}\",\n          \"title\": \"Red Velvet\",\n          \"cover_image\": \"https://picsum.photos/256\",\n          \"thumbnail\": \"https://picsum.photos/256\",\n          \"description\": \"{{ faker 'commerce.productDescription' }}\",\n          \"item_count\": {{ faker 'random.number' 100 }},\n          \"collected_count\": 0\n        }\n      }\n      {{/ repeat }}\n    ]\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "0c093a5b-ef54-4a73-adff-1839a0277127",
+                        "documentation": "All items collected by user",
+                        "method": "get",
+                        "endpoint": "api/user/collected",
+                        "responses": [
+                            {
+                                "uuid": "bb6a4488-02f5-479e-806f-08de8daaa459",
+                                "body": "{\n  \"collected\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"name\": \"{{ faker 'commerce.product' }}\",\n      \"cover_image\": \"https://picsum.photos/256\",\n      \"release_date\": \"{{ faker 'date.past' }}\",\n      \"collection\": {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"title\": \"Red Velvet\",\n        \"cover_image\": \"https://picsum.photos/256\",\n        \"thumbnail\": \"https://picsum.photos/256\",\n        \"description\": \"{{ faker 'commerce.productDescription' }}\",\n        \"item_count\": {{ faker 'random.number' 100 }},\n        \"collected_count\": 0\n      }\n    }\n    {{/ repeat }}\n  ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "123c2acd-0c98-40c5-bc3b-e1f7d875017f",
+                        "documentation": "Collected items for specified collection id",
+                        "method": "get",
+                        "endpoint": "api/user/collected/*",
+                        "responses": [
+                            {
+                                "uuid": "9ebdd838-5e39-4c53-a00e-7f1fce27b6e5",
+                                "body": "{\n  \"collected\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"name\": \"{{ faker 'commerce.product' }}\",\n      \"cover_image\": \"https://picsum.photos/256\",\n      \"release_date\": \"{{ faker 'date.past' }}\",\n      \"collection\": {\n        \"id\": \"{{ faker 'random.uuid' }}\",\n        \"title\": \"Red Velvet\",\n        \"cover_image\": \"https://picsum.photos/256\",\n        \"thumbnail\": \"https://picsum.photos/256\",\n        \"description\": \"{{ faker 'commerce.productDescription' }}\",\n        \"item_count\": {{ faker 'random.number' 100 }},\n        \"collected_count\": 0\n      }\n    }\n    {{/ repeat }}\n  ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "2d806463-47d7-458d-a0ba-43519f6eae36",
+                        "documentation": "All the active item requests",
+                        "method": "get",
+                        "endpoint": "api/requests",
+                        "responses": [
+                            {
+                                "uuid": "300d12e7-c5cf-4af3-a3c5-e396689fd02a",
+                                "body": "{\n  \"itemRequests\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"name\": \"{{ faker 'commerce.product' }}\",\n      \"description\": \"{{ faker 'commerce.productDescription' }}\",\n      \"evidence\": \"{{ faker 'commerce.productDescription' }}\",\n      \"collection_id\": \"{{ faker 'random.uuid' }}\",\n      \"collection_name\": \"{{ faker 'commerce.product' }}\",\n      \"requester_id\": \"{{ faker 'random.uuid' }}\",\n      \"requester_username\": \"{{ faker 'internet.userName' }}\",\n      \"cover_image\": \"https://picsum.photos/256\",\n      \"release_date\": \"{{ faker 'date.past' }}\"\n    }\n    {{/ repeat }}\n  ],\n  \"collectionRequests\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"name\": \"{{ faker 'commerce.product' }}\",\n      \"description\": \"{{ faker 'commerce.productDescription' }}\",\n      \"evidence\": \"{{ faker 'commerce.productDescription' }}\",\n      \"requester_id\": \"{{ faker 'random.uuid' }}\",\n      \"requester_username\": \"{{ faker 'internet.userName' }}\",\n      \"release_date\": \"{{ faker 'date.past' }}\"\n    }\n    {{/ repeat }}\n  ],\n   \"reputationReviews\": [\n    {{# repeat 10 }}\n    {\n      \"id\": \"{{ faker 'random.uuid' }}\",\n      \"feedback_id\": \"{{ faker 'random.uuid' }}\",\n      \"requester_id\": \"{{ faker 'random.uuid' }}\",\n      \"requester_username\": \"{{ faker 'internet.userName' }}\",\n      \"sender_id\": \"{{ faker 'random.uuid' }}\",\n      \"sender_username\": \"{{ faker 'internet.userName' }}\",\n      \"comment\": \"{{ faker 'commerce.productDescription' }}\",\n      \"evidence\": \"{{ faker 'commerce.productDescription' }}\",\n      \"timestamp\": \"{{ faker 'date.past' }}\"\n    }\n    {{/ repeat }}\n  ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "proxyRemovePrefix": false,
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Methods",
+                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Headers",
+                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+                    }
+                ],
+                "proxyReqHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "proxyResHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

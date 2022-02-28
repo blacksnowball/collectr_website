@@ -1,0 +1,5 @@
+Hi {{ username }}!
+
+To reset password, visit:
+
+{{ protocol }}://{{ domain }}{% url 'reset_confirm' uidb64=uid token=token %}

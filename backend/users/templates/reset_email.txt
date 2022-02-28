@@ -1,0 +1,5 @@
+Hi {{ username }}!
+
+To log into your account, visit:
+
+{{ protocol }}://{{ domain }}/magic?token={{ token }}

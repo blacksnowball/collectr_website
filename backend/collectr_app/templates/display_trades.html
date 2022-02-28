@@ -1,0 +1,41 @@
+{% load bootstrap4 %}
+
+{% if trades_and_screenshots %}
+
+    {% for trade,have,want in trades_and_screenshots %}
+        <h4>Description and Condition</h4>
+        <p><a href="/trades/{{ trade.id }}/">{{ trade.description }}</a></p>
+        <p>{{ trade.condition }}</p>
+
+        <br>
+        <br>
+
+        <h4>Have</h4>
+        {% if have|length == 1 %}
+            <img src="{{have.0.cover_image.url}}">
+        {% else %}
+            <img src="{{have.0.cover_image.url}}">
+            <img src="{{have.1.cover_image.url}}">
+            <img src="{{have.2.cover_image.url}}">
+            <img src="{{have.3.cover_image.url}}">
+        {% endif %}
+
+        <h4>Want</h4>
+        {% if want|length == 1 %}
+            <img src="{{want.0.cover_image.url}}">
+        {% else %}
+            <img src="{{want.0.cover_image.url}}">
+            <img src="{{want.1.cover_image.url}}">
+            <img src="{{want.2.cover_image.url}}">
+            <img src="{{want.3.cover_image.url}}">
+
+        {% endif %}
+
+        <br>
+        <br>
+
+    {% endfor %}
+
+{% else %}
+    <h4>There are no trades to be found.</h4>
+{% endif %}

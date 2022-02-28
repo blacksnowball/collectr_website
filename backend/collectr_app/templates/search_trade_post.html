@@ -1,0 +1,91 @@
+{% extends 'base_page.html' %}
+{% load bootstrap4 %}
+
+
+
+{% block content %}
+
+<!--https://bootsnipp.com/snippets/2q81r-->
+
+    <form method=POST action="/trades/search/">
+
+        {% csrf_token %}
+
+        <p>You can search for a trade by description, author, and items involved in the trade.</p>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input class="form-control" type="search" id="description" name="description_searched" placeholder="e.g. trade2412"/>
+        </div>
+        <div class="form-group">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input class="form-control" type="search" id="author" name="author_searched" placeholder="e.g. trade2412"/>
+        </div>
+        <div class="form-group">
+            <label for="collection">Collection</label>
+        <br>
+            <select class="selectpicker" id="collection" name="collection" data-live-search="true">
+                {% for collection in collections %}
+                <option data-icon="{{collection.cover_image.url}}">{{collection.title}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="have">Have</label>
+            <br>
+            <select class="selectpicker" id="have" name="have" data-selected-text-format="count" data-live-search="true" data-actions-box="true" multiple>
+                {% for item in items %}
+                <option data-img="{{item.cover_image.url}}">{{item.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="want">Want</label>
+            <br>
+            <select class="selectpicker" id="want" name="want" data-selected-text-format="count" data-live-search="true" data-actions-box="true" multiple>
+                {% for item in items %}
+                <option data-img="{{item.cover_image.url}}">{{item.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <button type="submit" class="btn btn-primary">Search For Trades</button>
+    </form>
+
+    <br>
+    <br>
+
+    {% include "display_trades.html" with trades_and_screenshots=matching_trades %}
+
+
+<!--    {% if matching_trades %}-->
+<!--        <ul>-->
+<!--        {% for trade in matching_trades %}-->
+<!--            <p><a href="/trades/{{ trade.trade_id }}/">{{ trade.description }}</a></p>-->
+<!--            <p>{{ trade.condition }}</p>-->
+<!--            <br>-->
+<!--            <br>-->
+<!--        {% endfor %}-->
+<!--        </ul>-->
+<!--    {% else %}-->
+<!--        <p>No matching trades found.</p>-->
+<!--    {% endif %}-->
+
+
+{% endblock %}
+
+<script>
+    $('select').selectpicker();
+    $(document).ready(function() {
+    $('#have').multiselect({
+        enableHTML: true,
+        optionLabel: function(element) {
+            return ' '+$(element).attr('data-img');
+            // var link = $(element).attr('data-img')
+            // console.log(link)
+            // return '<img src=' + link + '>'
+        }
+    })});
+</script>

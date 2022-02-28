@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+$theme-colors: (
+  'collectr-primary': $collectr-primary,
+  'collectr-secondary': $collectr-secondary,
+);
+
+.link-invisible {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-invisible:hover {
+  color: inherit;
+}
+
+.link-invisible-no-hover,
+.link-invisible-no-hover:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-collectr {
+  text-decoration: none;
+  color: $collectr-primary;
+}
+
+.link-collectr:hover {
+  color: $collectr-primary;
+}
+
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap-vue/src/index.scss';

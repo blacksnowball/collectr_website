@@ -1,0 +1,28 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+
+{% include 'collections/base_collection.html' %}
+{% if my_collections %}
+<div class="container-fluid border border-danger">
+    <div class="row">
+        <div class="card-deck">
+            {% for collection in my_collections %}
+            <div class="card" style="width: 18rem; left: 15px;">
+                <div class="card-header bg-info">
+                    <a class="text-white" href="/collections/{{collection.title}}/items/">{{collection.title}}</a>
+                </div>
+                <img class="card-img" src="{{collection.cover_image.url}}" />
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <p>There is nothing to see here</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base_page.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+    <div>
+        <h2>Profile</h2>
+        <p>Name: {{user.username}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Blurb: {{user.about}}</p>
+    </div>
+
+
+    <h2>My Items</h2>
+    {% if items %}
+    <div>
+        <ul>
+            {% for my_item in items %}
+            <li>{{my_item.name}}</li>
+            <img src="{{my_item.cover_image.url}}"/>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>No items collected yet.</p>
+    {% endif %}
+    </div>
+
+
+    <h2>My Trades</h2>
+    {% if own_trades %}
+    <div>
+        <ul>
+            {% for own_trade in own_trades %}
+            <li><p>Trade description: {{own_trade.description}}</p></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>No active trades.</p>
+    {% endif %}
+    </div>
+
+
+    <h2>Bookmarked Trades</h2>
+    {% if bookmarked_trades %}
+    <div>
+        <ul>
+            {% for bookmarked_trade in bookmarked_trades %}
+            <li><p>Trade description: {{bookmarked_trade.description}}</p></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>No trades bookmarked.</p>
+    {% endif %}
+    </div>
+
+
+    <br>
+{% endblock %}

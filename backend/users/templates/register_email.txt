@@ -1,0 +1,5 @@
+Hi {{ username }}!
+
+To register, visit:
+
+{{ protocol }}://{{ domain }}/confirm?token={{ token }}

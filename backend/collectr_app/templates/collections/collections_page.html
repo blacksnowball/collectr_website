@@ -1,0 +1,26 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+{% include 'collections/base_collection.html' %}
+{% if all_collections %}
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="card-deck">
+        {% for collection in all_collections %}
+            <div class="card" style="width: 18rem; left: 15px;">
+                <img class="card-img-top" src="{{collection.cover_image.url}}"/>
+                <div class="card-header ">
+                    <a class="text" href="/collections/{{collection.title}}/items/">{{collection.title}}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <h1>No Collections Available.</h1>
+    {% endif %}
+</div>
+{% endblock %}
+
+
